@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using System;
 
 namespace ErgastBot
 {
@@ -18,6 +19,11 @@ namespace ErgastBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
+                var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                Activity isTypingReply = activity.CreateReply();
+                isTypingReply.Type = ActivityTypes.Typing;
+
+                await connector.Conversations.ReplyToActivityAsync(isTypingReply);
                 await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
             else
