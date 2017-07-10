@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 
 namespace ErgastBot.LuisUpdate
 {
@@ -6,7 +7,12 @@ namespace ErgastBot.LuisUpdate
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
+        }
+
+        static async void RemoveClosedList()
+        {
+            var client = new HttpClient();
         }
     }
 }
